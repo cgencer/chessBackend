@@ -1,7 +1,24 @@
+// ====================================================================================================
+//
+// Cloud Code for AuthenticationResponse, write your code here to customise the GameSparks platform.
+//
+// For details of the GameSparks Cloud Code API see https://portal.gamesparks.net/docs.htm          
+//
+// ====================================================================================================
+
 if(Spark.getPlayer()!=null && Spark.getPlayer().getBalance4() <=0){
     require("EloRating");
     Spark.getPlayer().credit4(EloRating.StartValue);
 }
+
+/*
+credit1 ... personal score
+credit2 ... team score
+credit3 ... knowledge score (e.g. educational)
+credit4 ... ELO ratings
+credit5 ... coins (to be exchanged into real items)
+credit6 ... site-rating
+*/
 
 // only save if it is a new player
 if(Spark.getData().newPlayer) 
@@ -12,8 +29,12 @@ if(Spark.getData().newPlayer)
     
     Spark.getPlayer().addVGood(VirtualGoods.NewPlayerGift, 1);
     
-//    Spark.getPlayer().credit2(100);
+    Spark.getPlayer().credit1(0);               // defaults for guest players
+    Spark.getPlayer().credit2(0);
+    Spark.getPlayer().credit3(0);
     Spark.getPlayer().credit4(EloRating.StartValue);
+    Spark.getPlayer().credit5(0);
+    Spark.getPlayer().credit6(0);
     
     if(Spark.data.displayName == null){
 
